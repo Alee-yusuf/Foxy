@@ -40,7 +40,7 @@ export default function WhyChooseUs() {
             Why Choose Foxy Home Buyer?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We're not just another cash buyer. We're your neighbors, committed to helping Tampa Bay homeowners with fair, fast, and honest home sales.
+            We&apos;re not just another cash buyer. We&apos;re your neighbors, committed to helping Tampa Bay homeowners with fair, fast, and honest home sales.
           </p>
         </motion.div>
 

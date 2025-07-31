@@ -23,7 +23,7 @@ export default function Footer() {
               <span className="font-poppins font-bold text-xl">Foxy Home Buyer</span>
             </div>
             <p className="text-gray-300 mb-4">
-              Tampa Bay's trusted cash home buyer since 2014. We help homeowners sell fast with fair, no-obligation offers.
+              Tampa Bay&apos;s trusted cash home buyer since 2014. We help homeowners sell fast with fair, no-obligation offers.
             </p>
             <div className="text-sm text-gray-400">
               Licensed & Insured • A+ BBB Rating

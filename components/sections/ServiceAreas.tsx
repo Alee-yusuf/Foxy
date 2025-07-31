@@ -78,10 +78,10 @@ export default function ServiceAreas() {
         >
           <div className="bg-white rounded-2xl p-8 shadow-lg max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold font-poppins text-secondary mb-4">
-              Don't See Your Area Listed?
+              Don&apos;t See Your Area Listed?
             </h3>
             <p className="text-gray-600 mb-6">
-              We're always expanding our service area. Call us to see if we can help with your property.
+              We&apos;re always expanding our service area. Call us to see if we can help with your property.
             </p>
             <a 
               href="tel:8135550123"

@@ -74,7 +74,7 @@ export default function LeadForm() {
                   Thank You!
                 </h2>
                 <p className="text-lg text-gray-600 mb-6">
-                  We've received your information and will contact you within 24 hours with your cash offer.
+                  We&apos;ve received your information and will contact you within 24 hours with your cash offer.
                 </p>
                 <div className="text-primary font-semibold">
                   Expected response time: Within 4 hours
@@ -207,7 +207,7 @@ export default function LeadForm() {
                 Prefer to Talk?
               </h3>
               <p className="text-gray-600 mb-8">
-                Call us directly for immediate assistance. We're here to answer all your questions.
+                Call us directly for immediate assistance. We&apos;re here to answer all your questions.
               </p>
             </div>
 
@@ -262,7 +262,7 @@ export default function LeadForm() {
               <ul className="space-y-2 text-sm text-gray-600">
                 <li className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span>We'll review your property information</span>
+                  <span>We&apos;ll review your property information</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-primary rounded-full"></div>

@@ -50,7 +50,7 @@ export default function Testimonials() {
             What Our Customers Say
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Don't just take our word for it. Here's what real Tampa Bay homeowners say about their experience.
+            Don&apos;t just take our word for it. Here&apos;s what real Tampa Bay homeowners say about their experience.
           </p>
         </motion.div>
 
@@ -76,7 +76,7 @@ export default function Testimonials() {
                   </div>
                   
                   <p className="text-gray-600 mb-6 leading-relaxed italic">
-                    "{testimonial.text}"
+                    &quot;{testimonial.text}&quot;
                   </p>
                   
                   <div className="border-t pt-4">
