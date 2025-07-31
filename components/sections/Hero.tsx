@@ -1,114 +1,158 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, Home, Clock, DollarSign } from 'lucide-react';
+import { Home, Clock, DollarSign, Phone, CheckCircle } from 'lucide-react';
 import Image from 'next/image';
+import confetti from 'canvas-confetti';
 
 export default function Hero() {
+  const [showToast, setShowToast] = useState(false);
+
+  const phoneNumber = '(813) 555-0123';
+  const rawPhoneNumber = '8135550123';
+
   const scrollToForm = () => {
+    triggerConfetti();
     document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg"
-          alt="Tampa Home"
-          fill
-          className="object-cover"
-          priority
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLM3Hh7N1iplf2AHUY32+3fj7VbMKnlKjRWjNFSj1+xPIvuL3WfJKmhwBWZFdkOq7uo6J4qxPcUHLl6P6Ue0bQWh9guxN3I2iMpGAfQFE7C6WpCQNgFgHD7CqQkBOLQepTCv/Z"
-        />
-        <div className="absolute inset-0 bg-hero-gradient" />
-      </div>
+  const triggerConfetti = () => {
+    confetti({
+      particleCount: 120,
+      spread: 70,
+      origin: { y: 0.8 },
+      colors: ['#ff7f50', '#ffbf00', '#00bfff', '#32cd32'],
+    });
+  };
 
-      {/* Content */}
-      <div className="relative z-10 container mt-40 mb-20 mx-auto px-4 text-center text-white">
+  const handlePhoneClick = (e: React.MouseEvent) => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (!isMobile) {
+      e.preventDefault();
+      navigator.clipboard.writeText(rawPhoneNumber).then(() => {
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+      });
+    }
+  };
+
+  return (
+    <>
+      <section
+        id="hero"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      >
+        {/* Background Image with Parallax */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+          className="absolute inset-0 z-0"
+          initial={{ scale: 1.2 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 2 }}
         >
-          <motion.h1 
-            className="text-5xl md:text-7xl font-bold font-poppins leading-tight mb-6"
+          <Image
+            src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg"
+            alt="Tampa Home"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+        </motion.div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 container mx-auto px-4 text-center text-white pt-32 pb-20">
+          <motion.h1
+            className="text-4xl md:text-7xl font-bold font-poppins leading-tight mb-6 drop-shadow-lg"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8 }}
           >
             Sell Your Tampa Home{' '}
-            <span className="text-primary">Fast for Cash</span>
+            <span className="text-primary animate-pulse">Fast for Cash</span>
           </motion.h1>
 
-          <motion.p 
-            className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto leading-relaxed"
+          <motion.p
+            className="text-lg md:text-2xl mb-10 text-gray-200 max-w-2xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
-            No Repairs. No Fees. Get a Fair Offer in 24 Hours.
+            No Repairs. No Fees. Get a{' '}
+            <span className="text-primary font-semibold">Fair Offer</span> in 24
+            Hours.
           </motion.p>
 
+          {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-14"
           >
-            <Button 
+            {/* Left CTA with Confetti */}
+            <Button
               onClick={scrollToForm}
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-white px-8 py-4 text-lg font-bold rounded-xl shadow-2xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105 animate-glow"
+              className="relative overflow-hidden bg-primary px-10 py-4 text-lg font-bold rounded-xl shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-primary/40"
             >
-              Get My Cash Offer Now
+              <span className="relative z-10">Get My Cash Offer Now</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-primary to-pink-500 opacity-30 animate-pulse" />
             </Button>
-            <a 
-              href="tel:8135550123"
-              className="flex items-center space-x-2 text-white hover:text-primary transition-colors"
+
+            {/* Phone CTA */}
+            <a
+              href={`tel:${rawPhoneNumber}`}
+              onClick={handlePhoneClick}
+              className="flex items-center space-x-3 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition"
             >
-              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                <DollarSign className="w-6 h-6" />
-              </div>
-              <div className="text-left">
-                <div className="text-sm text-gray-300">Call Now</div>
-                <div className="font-semibold">(813) 555-0123</div>
-              </div>
+              <Phone className="w-5 h-5 text-primary" />
+              <span className="font-semibold">{phoneNumber}</span>
             </a>
           </motion.div>
 
+          {/* Feature Cards */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto"
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
           >
             {[
               { icon: Home, title: 'Any Condition', desc: 'We buy houses as-is' },
               { icon: Clock, title: '24 Hour Offers', desc: 'Quick response guaranteed' },
               { icon: DollarSign, title: 'Fair Cash Offers', desc: 'No lowball offers' }
-            ].map((item, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-                <item.icon className="w-8 h-8 text-primary mx-auto mb-3" />
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ y: -8, scale: 1.03 }}
+                className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-lg hover:shadow-primary/20 transition-all duration-300"
+              >
+                <item.icon className="w-10 h-10 text-primary mx-auto mb-4" />
                 <h3 className="font-bold text-lg mb-2">{item.title}</h3>
                 <p className="text-gray-300 text-sm">{item.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
-        </motion.div>
+        </div>
+      </section>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          {/* <ArrowDown className="w-6 h-6 text-white animate-bounce" /> */}
-        </motion.div>
-      </div>
-    </section>
+      {/* ✅ Animated Toast */}
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="fixed bottom-6 left-6 bg-black/90 text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2 z-50"
+          >
+            <CheckCircle className="w-5 h-5 text-green-400" />
+            <span>Phone number copied!</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
